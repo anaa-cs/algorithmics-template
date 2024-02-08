@@ -1,0 +1,6 @@
+Years of counting: 14 years
+Meaning time measured to 0:
+Size of problem we get reliable times: 50000
+Multiplied by 2: We have to wait twice as much iterations to get a time that isn't 0 milliseconds
+Multiplication value changed: The iterations we have to wait to get to a time that isn't 0 milliseconds is lower
+Times for O(n): Yes, because 
