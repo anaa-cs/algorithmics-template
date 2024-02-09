@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class JavaA1 {
 
-	public void main() {
+	
+	public static void main(String[] args) {
 		long n = 10000;
 		for (int i = 0; i < 7; i++) {
 			long t1 = System.currentTimeMillis();
@@ -16,7 +17,7 @@ public class JavaA1 {
 
 	}
 
-	public ArrayList<Integer> listadoPrimos(long n) {
+	public static ArrayList<Integer> listadoPrimos(long n) {
 		ArrayList<Integer> primes = new ArrayList<Integer>();
 		for (int i = 2; i < n; i++) {
 			if (primoA1(i)) {
@@ -27,7 +28,7 @@ public class JavaA1 {
 
 	}
 
-	public boolean primoA1(int m) {
+	public static boolean primoA1(int m) {
 		boolean p = true;
 		for (int i = 2; i < m; i++) {
 			if (m % i == 0) {
