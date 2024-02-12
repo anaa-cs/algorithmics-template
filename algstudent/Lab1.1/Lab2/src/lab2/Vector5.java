@@ -15,7 +15,7 @@ public class Vector5 {
 
 			t1 = System.currentTimeMillis();
 			// We have to repeat the whole process to be measured
-			for (int repetition = 10; repetition <= repetitions; repetition++) {
+			for (int repetition = 1; repetition <= repetitions; repetition++) {
 				m = new int[2];
 				Vector1.maximum(v, m);
 			}

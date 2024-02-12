@@ -1,6 +1,6 @@
 package lab2;
 
-public class Vector6 {
+public class Vector7 {
 	
 	static int[] v;
 	static int[] w;
@@ -19,7 +19,7 @@ public class Vector6 {
 			t1 = System.currentTimeMillis();
 			// We have to repeat the whole process to be measured
 			for (int repetition = 1; repetition <= repetitions; repetition++) {
-				m = Vector1.matches1(w, v);
+				m = Vector1.matches2(w, v);
 			}
 			t2 = System.currentTimeMillis();
 			System.out.printf("SIZE=%d TIME=%d milliseconds MATCHES=%d NTIMES=%d\n", n, t2 - t1, m, repetitions);
