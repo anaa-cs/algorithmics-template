@@ -1,19 +1,34 @@
 package s2;
 
 public class QuicksortInsertion {
-	public static final int threshold = 5;
-
-	public static void quicksortWithInsertion(int[] a, int right, int left) {
+	public static void insertion(int[] a, int left, int right) {
+		int j;
+		int pivot;
+		int n = right;
+		
+		for (int i =  left; i < n; i++) {
+			pivot = a[i];
+			j = i-1;
+			
+			while (j >= left && pivot < a[j]) {
+				a[j+1] = a[j];
+				j--;
+			}
+			
+			a[j+1] = pivot;
+		}
+	}
+	public static void quicksortWithInsertion(int[] a, int left, int right, int k) {
 		int i = left;
 		int j = right - 1;
 		
-		if (right < left) {
-			if (right-left + 1 <= threshold) {
-				Insertion.insertion(a,i,j);
+		if (right > left) {
+			if (right-left <= k) {
+				insertion(a,i,j);
 			} else {
 				int center = median_of_three(a, left, right);
 				// if there are less than or equal to 3 elements, there are just ordered
-				if ((right - left) >= 3) {
+				//if ((right - left) > k) {
 					int pivot = a[center]; // choose the pivot
 					Vector.interchange(a, center, right); // hide the pivot
 
@@ -28,9 +43,9 @@ public class QuicksortInsertion {
 
 					// we set the position of the pivot
 					Vector.interchange(a, i, right);
-					quicksortWithInsertion(a, left, i - 1);
-					quicksortWithInsertion(a, i + 1, right);
-				} // if
+					quicksortWithInsertion(a, left, i - 1,k);
+					quicksortWithInsertion(a, i + 1, right,k);
+//				} // if
 			}
 		}
 	}
