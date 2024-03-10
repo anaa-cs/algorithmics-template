@@ -1,6 +1,6 @@
 package algstudent.s3;
 
-public class MergesortTimes {
+public class QuicksortTimes {
 	static int[] v;
 
 	public static void main(String arg[]) {
@@ -19,11 +19,9 @@ public class MergesortTimes {
 
 			t1 = System.currentTimeMillis();
 
-			Mergesort.mergesort(v);
+			Quicksort.quicksort(v);
 
 			t2 = System.currentTimeMillis();
-			
-			
 
 			System.out.println(n + "\t" + (t2 - t1));
 		}

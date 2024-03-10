@@ -33,24 +33,31 @@ public class Mergesort {
 
 		int counterX = 0;
 		int counterY = 0;
-		int elementsX = 0;
-		int elementsY = 0;
-
-		for (int i = 0; i < elements.length; i++) {
-			while (elementsX != sizeX || elementsY != sizeY) {
-				System.out.println(elementsX);
-				if (x[counterX] <= y[counterY]) {
-					elements[i] = x[counterX];
-					counterX++;
-					elementsX++;
-					break;
-				} else {
-					elements[i] = y[counterY];
-					counterY++;
-					elementsY++;
-					break;
-				}
+		int elemX=0;
+		int elemY=0;
+		
+		while (counterX<sizeX || counterY<sizeY) {
+			if (counterX>=sizeX) {
+				elemX=(int) Double.POSITIVE_INFINITY;
+			} else {
+				elemX=x[counterX];
 			}
+			
+			if (counterY>=sizeY) {
+				elemY=(int) Double.POSITIVE_INFINITY;
+			} else {
+				elemY=y[counterY];
+			}
+			
+			if(elemX>elemY) {
+				elements[x1+counterX+counterY]=elemY;
+				counterY++;
+			} else {
+				elements[x1+counterX+counterY]=elemX;
+				counterX++;
+			}
+				
 		}
+		
 	}
 }
