@@ -49,19 +49,3 @@ def triangularMatrixFromFile(file):
         i=i+1
     fi.close()
     return m
-
-m=triangularMatrixFromFile("graph8.txt")
-printMatrix(m)
-
-
-
-
-
-
-
-
-
-
-
-
-
