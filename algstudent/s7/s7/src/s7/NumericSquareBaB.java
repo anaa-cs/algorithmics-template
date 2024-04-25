@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class NumericSquareBaB {
 
 	private int size;
-	private ArrayList<String[]> result_files = new ArrayList<String[]>();
+	private ArrayList<String[]> board = new ArrayList<String[]>();
+	private ArrayList<ArrayList<String[]>> boards = new ArrayList<ArrayList<String[]>>();
 	private String fileName;
 
 //	public NumericSquareBaB(String file) {
@@ -24,22 +25,63 @@ public class NumericSquareBaB {
 		NumericSquareBaB n = new NumericSquareBaB();
 		n.loadData("src/files/test00.txt");
 		n.showMatrix();
-		n.compute();
+		n.compute(0, 0);
+		System.out.println(n.boards.size());
 		System.out.println("Solution: ");
 		n.showMatrix();
 	}
 
-	private boolean compute() {
+	private boolean compute(int row, int col) {
+		int nextRow = row;
+		int nextCol = col + 2;
+
+		if (board.get(row)[col].equals("?")) {
+			for (int pos = 0; pos <= 9; pos++) {
+				board.get(row)[col] = pos + "";
+				ArrayList<String[]> aux = copy(board);
+				boards.add(aux);
+				// orderPossibilities(row, col);
+			}
+
+		} else {
+			compute(nextRow, nextCol);
+		}
+
 		return false;
 	}
 
+	private ArrayList<String[]> copy(ArrayList<String[]> aux) {
+		ArrayList<String[]> result = new ArrayList<String[]>();
+
+		for (int row = 0; row < aux.size(); row++) {
+			String[] r = new String[aux.get(row).length];
+			for (int col = 0; col < r.length; col++) {
+				r[col] = aux.get(row)[col];
+			}
+			result.add(r);
+		}
+
+		return result;
+	}
+
+//	private void orderPossibilities(int row, int col) {
+//		ArrayList<ArrayList<String[]>> aux = new ArrayList<ArrayList<String[]>>();
+//		for (int i = 0; i < aux.size(); i++) {
+//			if()
+//		}
+//	}
+
+	private boolean check(int pos, boolean column, ArrayList<String[]> square) {
+		return true;
+	}
+
 	private void showMatrix() {
-		for (int i = 0; i < this.result_files.size(); i++) {
-			for (int j = 0; j < this.result_files.get(i).length; j++) {
-				if (this.result_files.get(i).length != this.result_files.get(0).length && j != 0) {
+		for (int i = 0; i < board.size(); i++) {
+			for (int j = 0; j < board.get(i).length; j++) {
+				if (this.board.get(i).length != board.get(0).length && j != 0) {
 					System.out.print("\t");
 				}
-				System.out.print(this.result_files.get(i)[j] + "\t");
+				System.out.print(board.get(i)[j] + "\t");
 			}
 			System.out.println();
 			System.out.println();
@@ -51,10 +93,10 @@ public class NumericSquareBaB {
 
 		try {
 			reader = new BufferedReader(new FileReader(file));
-			this.size = Integer.parseInt(reader.readLine());
+			size = Integer.parseInt(reader.readLine());
 			while (reader.ready()) {
 				String[] parts = reader.readLine().split(" ");
-				result_files.add(parts);
+				board.add(parts);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
