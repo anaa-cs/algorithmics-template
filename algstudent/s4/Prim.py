@@ -6,6 +6,7 @@ def prim(m):
     weights = [0]
     truth = [False] * nodes
     truth[0] = True
+    total_cost = 0
 
     while(len(visited) < nodes):
         min_weight = float("inf")
@@ -15,10 +16,11 @@ def prim(m):
             if(aux < min_weight):
                 min_weight = aux
                 min_pos = pos
+        total_cost += min_weight
         weights.append(min_weight)
         visited.append(min_pos)
         truth[min_pos] = True
-    return weights, visited
+    return weights, visited, total_cost
 
 def minimum(matrix, nodes, pos_node, array):
     min_weight = float("inf")
