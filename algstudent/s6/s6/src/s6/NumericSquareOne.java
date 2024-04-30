@@ -16,50 +16,52 @@ public class NumericSquareOne {
 		fileName = file;
 		this.loadData(fileName);
 		this.showMatrix(this.result_files);
-		try {
-			this.computeSquare(this.result_files, 0, 0);
-		} catch (Solution e) {
-			System.out.println("First solution");
-			this.showMatrix(this.result_files);
-		}
+		this.computeSquare(0, 0);
+		System.out.println("First solution");
+		this.showMatrix(this.result_files);
 	}
 
-	private void computeSquare(ArrayList<String[]> square, int row, int col) throws Solution {
+	private boolean computeSquare(int row, int col) {
 		int nextRow;
 		int nextCol;
 
 		nextRow = row;
-		nextCol = col + 1;
+		nextCol = col + 2;
 
-		if (col >= square.get(0).length - 1) {
+		if (col >= this.result_files.get(0).length - 1) {
 			nextRow = row + 2;
 			nextCol = 0;
 		}
 
-		if (nextCol >= square.get(0).length - 1) {
-			if (!checkInd(square.get(row))) {
-				return;
+		if (col >= size * 2) {
+			if (!checkInd(result_files.get(row))) {
+				return false;
 			}
 		}
 
-		if (row == square.get(0).length - 1) {
+		if (row == this.result_files.get(0).length - 1) {
 			for (int pos = 0; pos <= (this.size - 1) * 2; pos += 2) {
 				if (!checkInd(getColumn(pos))) {
-					return;
+					return false;
 				}
 			}
-			throw new Solution();
+			return true;
 		}
 
-		if (square.get(row)[col].equals("?")) {
+		if (this.result_files.get(row)[col].equals("?")) {
 			for (int possibility = 0; possibility < 10; possibility++) {
-				square.get(row)[col] = possibility + "";
-				computeSquare(square, nextRow, nextCol);
+				this.result_files.get(row)[col] = possibility + "";
+				if (computeSquare(nextRow, nextCol)) {
+					return true;
+				}
 			}
-			square.get(row)[col] = "?";
+			this.result_files.get(row)[col] = "?";
 		} else {
-			computeSquare(square, nextRow, nextCol);
+			if (computeSquare(nextRow, nextCol)) {
+				return true;
+			}
 		}
+		return false;
 	}
 
 	private String[] getColumn(int pos) {
@@ -78,26 +80,20 @@ public class NumericSquareOne {
 
 	private boolean checkInd(String[] operation) {
 		int solution = Integer.parseInt(operation[operation.length - 1]);
-		ArrayList<Integer> numbers = new ArrayList<Integer>();
-		ArrayList<String> operations = new ArrayList<String>();
-		for (int i = 0; i < operation.length - 2; i++) {
-			if (i % 2 == 0) {
-				numbers.add(Integer.parseInt(operation[i]));
-			} else {
-				operations.add(operation[i]);
-			}
-		}
+		double partial = Double.parseDouble(operation[0]);
 
-		double partial = numbers.get(0);
-		for (int k = 0; k < operations.size(); k++) {
-			if (operations.get(k).equals("+")) {
-				partial += numbers.get(k + 1);
-			} else if (operations.get(k).equals("-")) {
-				partial -= numbers.get(k + 1);
-			} else if (operations.get(k).equals("*")) {
-				partial *= numbers.get(k + 1);
-			} else if (operations.get(k).equals("/") && numbers.get(k + 1) != 0) {
-				partial /= numbers.get(k + 1);
+		for (int pos = 1; pos < operation.length - 1; pos += 2) {
+			int next = Integer.parseInt(operation[pos + 1]);
+			if (operation[pos].equals("+")) {
+				partial += next;
+			} else if (operation[pos].equals("-")) {
+				partial -= next;
+			}
+			if (operation[pos].equals("*")) {
+				partial *= next;
+			}
+			if (operation[pos].equals("/") && next != 0) {
+				partial /= next;
 			}
 		}
 

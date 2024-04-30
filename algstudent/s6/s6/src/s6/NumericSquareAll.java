@@ -78,26 +78,20 @@ public class NumericSquareAll {
 
 	private boolean checkInd(String[] operation) {
 		int solution = Integer.parseInt(operation[operation.length - 1]);
-		ArrayList<Integer> numbers = new ArrayList<Integer>();
-		ArrayList<String> operations = new ArrayList<String>();
-		for (int i = 0; i < operation.length - 2; i++) {
-			if (i % 2 == 0) {
-				numbers.add(Integer.parseInt(operation[i]));
-			} else {
-				operations.add(operation[i]);
-			}
-		}
+		double partial = Double.parseDouble(operation[0]);
 
-		double partial = numbers.get(0);
-		for (int k = 0; k < operations.size(); k++) {
-			if (operations.get(k).equals("+")) {
-				partial += numbers.get(k + 1);
-			} else if (operations.get(k).equals("-")) {
-				partial -= numbers.get(k + 1);
-			} else if (operations.get(k).equals("*")) {
-				partial *= numbers.get(k + 1);
-			} else if (operations.get(k).equals("/") && numbers.get(k + 1) != 0) {
-				partial /= numbers.get(k + 1);
+		for (int pos = 1; pos < operation.length - 1; pos += 2) {
+			int next = Integer.parseInt(operation[pos + 1]);
+			if (operation[pos].equals("+")) {
+				partial += next;
+			} else if (operation[pos].equals("-")) {
+				partial -= next;
+			}
+			if (operation[pos].equals("*")) {
+				partial *= next;
+			}
+			if (operation[pos].equals("/") && next != 0) {
+				partial /= next;
 			}
 		}
 
