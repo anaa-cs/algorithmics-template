@@ -12,19 +12,16 @@ public class NumericSquareBaB {
 	private int size;
 	private ArrayList<String[]> board = new ArrayList<String[]>();
 	private ArrayList<ArrayList<String[]>> boards = new ArrayList<ArrayList<String[]>>();
+	private int steps;
 
 	public NumericSquareBaB(String fileName) {
+		steps = 1;
 		loadData(fileName);
 		compute(0, 0, this.board);
-		System.out.println(fileName);
-		System.out.println();
 		showMatrix(boards.get(0));
+		System.out.println("Nodes developed: " + steps);
 		System.out.println();
 	}
-
-//	public static void main(String[] args) {
-//		NumericSquareBaB n = new NumericSquareBaB();
-//	}
 
 	private boolean compute(int row, int col, ArrayList<String[]> board) {
 		int nextRow = row;
@@ -41,6 +38,7 @@ public class NumericSquareBaB {
 
 		if (board.get(row)[col].equals("?")) {
 			for (int pos = 0; pos <= 9; pos++) {
+				steps++;
 				board.get(row)[col] = pos + "";
 				ArrayList<String[]> aux = copy(board);
 				boards.add(aux);

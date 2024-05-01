@@ -11,14 +11,17 @@ public class NumericSquareOne {
 	ArrayList<String[]> result_files = new ArrayList<String[]>();
 	private int size;
 	private String fileName;
+	private int steps;
 
 	public NumericSquareOne(String file) {
+		this.steps = 1;
 		fileName = file;
 		this.loadData(fileName);
 		this.showMatrix(this.result_files);
 		this.computeSquare(0, 0);
 		System.out.println("First solution");
 		this.showMatrix(this.result_files);
+		System.out.println("Developed nodes: " + steps);
 	}
 
 	private boolean computeSquare(int row, int col) {
@@ -51,12 +54,14 @@ public class NumericSquareOne {
 		if (this.result_files.get(row)[col].equals("?")) {
 			for (int possibility = 0; possibility < 10; possibility++) {
 				this.result_files.get(row)[col] = possibility + "";
+				steps++;
 				if (computeSquare(nextRow, nextCol)) {
 					return true;
 				}
 			}
 			this.result_files.get(row)[col] = "?";
 		} else {
+			steps++;
 			if (computeSquare(nextRow, nextCol)) {
 				return true;
 			}
